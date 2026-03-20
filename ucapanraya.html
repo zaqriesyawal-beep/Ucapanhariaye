@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ucapan Hari Raya Aidilfitri</title>
+    <style>
+        /* Gaya Visual (CSS) */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            background: #fbbf24;
+            color: #064e3b;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+        }
+
+        button:hover {
+            background: #f59e0b;
+            transform: translateY(-3px);
+        }
+
+        #ucapan-section {
+            display: none;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .isi-ucapan {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            text-align: justify;
+            margin-top: 15px;
+            color: #e5e7eb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Hiasan Ketupat Jatuh */
+        .ketupat {
+            position: absolute;
+            top: -50px;
+            font-size: 25px;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Mencipta hiasan jatuh secara rawak
+        for (let i = 0; i < 15; i++) {
+            let div = document.createElement('div');
+            div.className = 'ketupat';
+            div.innerHTML = '🌙';
+            div.style.left = Math.random() * 100 + 'vw';
+            div.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            div.style.opacity = Math.random();
+            document.body.appendChild(div);
+        }
+    </script>
+
+    <div class="card">
+        <div id="input-section">
+            <h1>Selamat Hari Raya</h1>
+            <p>Siapa yang sedang melawat ni? 👋</p>
+            <input type="text" id="userName" placeholder="Masukkan nama anda..." autocomplete="off">
+            <br>
+            <button onclick="mula()">Hantar</button>
+        </div>
+
+        <div id="ucapan-section">
+            <h1 id="namaUser"></h1>
+            <div class="isi-ucapan">
+                <p>Raya tahun ni dengan tahun lepas, jujur aku rasa tak semeriah macam dulu. Banyak benda dah berubah, suasana pun tak sama macam dulu lagi. Masing-masing pun dah sibuk dengan hal sendiri. Tapi apa pun, aku tetap hargai setiap momen yang ada.</p>
+                <p>Di kesempatan ini, aku nak ucapkan <strong>Selamat Hari Raya Aidilfitri, maaf zahir dan batin</strong> kepada semua. Semoga kita semua dipanjangkan umur, dimurahkan rezeki, dan diberi kesihatan yang baik untuk terus menjalani hari-hari mendatang.</p>
+            </div>
+            <br>
+            <button onclick="location.reload()" style="background: transparent; color: white; border: 1px solid white;">Balik</button>
+        </div>
+    </div>
+
+    <script>
+        // Logik JavaScript
+        function mula() {
+            const inputNama = document.getElementById('userName').value;
+            
+            if (inputNama.trim() === "") {
+                alert("Jangan malu-malu, masukkan la nama dulu!");
+                return;
+            }
+
+            // Tukar skrin
+            document.getElementById('input-section').style.display = 'none';
+            document.getElementById('ucapan-section').style.display = 'block';
+            
+            // Set nama (Huruf Besar)
+            document.getElementById('namaUser').innerText = "HI " + inputNama.toUpperCase() + "!";
+        }
+
+        // Fungsi supaya boleh tekan Enter
+        document.getElementById('userName').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                mula();
+            }
+        });
+    </script>
+
+</body>
+</html>
